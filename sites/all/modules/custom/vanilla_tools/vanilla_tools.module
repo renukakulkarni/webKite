@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * Implements hook_init()
+ */
+function vanilla_tools_init() {
+  drupal_add_js(drupal_get_path('module', 'vanilla_tools') . '/js/vanilla_tools.js');
+
+}
+/**
+ * Implements hook_menu()
+ */
+
+function vanilla_tools_menu(){
+ $items = array();
+ $items['mypage-html'] = array(
+   'title' => 'Page with HTML style output function',
+   'page callback' => 'mypage_html_page',
+   'access callback' => TRUE,
+ );
+ $items['mypage-render-array'] = array(
+   'title' => 'Page with render array as output',
+   'page callback' => 'mypage_render_array_page',
+   'access callback' => TRUE,
+  );
+
+ return $items;
+}
+
+function mypage_html_page() {
+  $output = '<p>Some HTMl stuff</p>';
+  $output .= '<ul><li>first item</li><li>Second item</li><li>third item</li></ul>';
+  return $output;
+}
+
+function mypage_render_array_page() {
+  $output = array();
+  $output = array(
+    'first_para' => array(
+      '#type' => 'markup',
+      '#markup' => '<p>Some random stuff</p>',
+    ),
+    'second_para' => array(
+      '#items' =>array('first item', 'second item', 'third item', 'forth item'),
+      '#theme' => 'item_list',
+    ),
+  );
+  return $output;
+}

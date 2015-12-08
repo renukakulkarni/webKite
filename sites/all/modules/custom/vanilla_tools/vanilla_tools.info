@@ -1,0 +1,4 @@
+name = Vanilla Tools
+description = Handles custom functionalities for vanilla drupal
+core = 7.x
+package = Custom
